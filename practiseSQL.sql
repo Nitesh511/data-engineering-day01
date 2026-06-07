@@ -1,0 +1,112 @@
+CREATE TABLE STUDENTS (
+	ID SERIAL PRIMARY KEY,
+	NAME VARCHAR(100),
+	GRADE INT,
+	SUBJECT VARCHAR(50),
+	CITY VARCHAR(50)
+)
+INSERT INTO
+	STUDENTS (NAME, GRADE, SUBJECT, CITY)
+VALUES
+	('Arjun', 85, 'Math', 'Kathmandu'),
+	('Priya', 92, 'Science', 'Pokhara'),
+	('Anita', 78, 'Science', 'Lalitpur'),
+	('Bikash', 55, 'Math', 'Kathmandu'),
+	('Sita', 45, 'Math', 'Pokhara'),
+	('Ram', 88, 'Science', 'Lalitpur'),
+	('Gita', 60, 'Science', 'Kathmandu');
+
+SELECT
+	*
+FROM
+	STUDENTS
+SELECT
+	*
+FROM
+	STUDENTS
+WHERE
+	SUBJECT = 'Math'
+SELECT
+	*
+FROM
+	STUDENTS
+WHERE
+	GRADE >= 60
+ORDER BY
+	GRADE DESC
+SELECT
+	SUBJECT,
+	COUNT(*) AS TOTAL_STUDENTS,
+	AVG(GRADE) AS AVERAGE_GRADE,
+	MAX(GRADE) AS HIGHEST_GRADE,
+	MIN(GRADE) AS LOWEST_GRADE
+FROM
+	STUDENTS
+GROUP BY
+	SUBJECT
+SELECT
+	SUBJECT,
+	AVG(GRADE) AS AVERAGE_GRADE
+FROM
+	STUDENTS
+GROUP BY
+	SUBJECT
+HAVING
+	AVG(GRADE) > 75;
+
+SELECT
+	NAME,
+	SUBJECT,
+	GRADE,
+	RANK() OVER (
+		PARTITION BY
+			SUBJECT
+		ORDER BY
+			GRADE DESC
+	) AS RANK_IN_SUBJECT
+FROM
+	STUDENTS;
+
+SELECT
+	*
+FROM
+	(
+		SELECT
+			NAME,
+			SUBJECT,
+			GRADE,
+			RANK() OVER (
+				PARTITION BY
+					SUBJECT
+				ORDER BY
+					GRADE DESC
+			) AS RANK_IN_SUBJECT
+		FROM
+			STUDENTS
+	) RANKED
+WHERE
+	RANK_IN_SUBJECT = 1;
+
+SELECT
+	*
+FROM
+	STUDENTS
+WHERE
+	CITY = 'Kathmandu'
+SELECT
+	CITY,
+	COUNT(*) AS TOTAL_NUMBER_STUDENTS
+FROM
+	STUDENTS
+GROUP BY
+	CITY
+
+select * from students
+where grade > (select avg(grade) from students)
+
+select max(grade), city from students
+group by city
+
+select * from students 
+order by grade desc
+limit 3

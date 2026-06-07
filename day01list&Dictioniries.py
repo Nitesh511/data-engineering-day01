@@ -24,3 +24,22 @@ print("Employee Details after adding experience:", employee)
 for key, value in employee.items(): # iterating through the dictionary
     print(f"{key}: {value}")
 
+
+# --- LIST OF DICTS (this is exactly what database rows look like) ---
+users = [
+    {"id": 1, "name": "Ram", "age": 25, "city": "Kathmandu"},
+    {"id": 2, "name": "Sita", "age": 30, "city": "Pokhara"},
+    {"id": 3, "name": "Hari", "age": 22, "city": "Kathmandu"},
+]
+
+print("\nUsers List of Dictionaries:", users)
+
+print("\nAll users:")
+for user in users:
+    print(f"  {user['id']} - {user['name']} from {user['city']}")
+    
+
+kathmandu_users=[u for u in users if  u["city"]=="Kathmandu"] # list comprehension to filter users from Kathmandu
+print("\nKathmandu users only:")
+for user in kathmandu_users:
+    print(f"  {user['name']}")
